@@ -47,7 +47,7 @@ public class SlimefunScrapper {
             ResearchSetup.setupResearches();
             PostSetup.setupWiki();
 
-            logger.info("Exporting to file: " + exportFile.getName());
+            logger.info("Exporting to file: " + exportFile.getAbsolutePath());
             export(exportFile);
 
             long elapsed = System.currentTimeMillis() - start;

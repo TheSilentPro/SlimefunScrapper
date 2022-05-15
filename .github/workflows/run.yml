@@ -25,6 +25,7 @@ jobs:
 
       - name: Push
         run: |
+          git fetch --all
           git config --global user.name 'PushBot'
           git config --global user.email 'thesilentpro@users.noreply.github.com'
           git commit -m 'Auto push changes' items.json
