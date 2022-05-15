@@ -23,12 +23,10 @@ jobs:
       - name: Run
         run: java -jar target/SlimefunScrapper.jar
 
-      - name: Checkout (Post-Build)
-        uses: actions/checkout@v3.0.0
-
       - name: Push
         run: |
           git config --global user.name 'PushBot'
           git config --global user.email 'thesilentpro@users.noreply.github.com'
-          git commit -m 'Auto push changes' /home/runner/work/SlimefunScrapper/SlimefunScrapper/items.json
+          git add items.json
+          git commit -m 'Auto push changes'
           git push
