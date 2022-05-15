@@ -53,4 +53,8 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <finalName>SlimefunScrapper</finalName>
+    </build>
+
 </project>
