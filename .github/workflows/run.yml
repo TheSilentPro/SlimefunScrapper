@@ -8,13 +8,24 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Check out Repository
+        uses: actions/checkout@v3.0.0
+
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: 'adopt'
+
       - name: Build with Maven
         run: mvn clean package
+
       - name: Run
         run: java -jar target/SlimefunScrapper.jar
+
+      - name: Push
+        run: |
+          git config --global user.name 'PushBot'
+          git config --global user.email 'thesilentpro@users.noreply.github.com'
+          git commit -m 'Auto push changes' items.json
+          git push
