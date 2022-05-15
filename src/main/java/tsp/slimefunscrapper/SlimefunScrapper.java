@@ -42,11 +42,12 @@ public class SlimefunScrapper {
             server = MockBukkit.mock();
             slimefun = MockBukkit.load(Slimefun.class);
 
+            logger.debug("Setting up slimefun...");
             SlimefunItemSetup.setup(slimefun);
             ResearchSetup.setupResearches();
             PostSetup.setupWiki();
 
-            logger.info("Exporting...");
+            logger.info("Exporting to file: " + exportFile.getName());
             export(exportFile);
 
             long elapsed = System.currentTimeMillis() - start;
@@ -54,6 +55,7 @@ public class SlimefunScrapper {
         }
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private static boolean validate() {
         return slimefun != null;
     }
