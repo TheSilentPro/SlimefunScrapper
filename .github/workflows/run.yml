@@ -25,8 +25,7 @@ jobs:
 
       - name: Push
         run: |
-          git fetch --all
           git config --global user.name 'PushBot'
           git config --global user.email 'thesilentpro@users.noreply.github.com'
-          git commit -m 'Auto push changes' items.json
+          git commit -m 'Auto push changes' /home/runner/work/SlimefunScrapper/SlimefunScrapper/items.json
           git push
