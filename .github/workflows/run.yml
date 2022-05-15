@@ -25,10 +25,10 @@ jobs:
       - name: Run
         run: java -jar target/SlimefunScrapper.jar
 
-      - name: Commit
+      - name: Push
         run: |
           git config --global user.name 'PushBot'
           git config --global user.email 'thesilentpro@users.noreply.github.com'
           git add items.json
           git commit -m 'Auto push changes'
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/TheSilentPro/SlimefunScrapper.git
+          git push https://${{ secrets.RW }}@github.com/TheSilentPro/SlimefunScrapper.git
