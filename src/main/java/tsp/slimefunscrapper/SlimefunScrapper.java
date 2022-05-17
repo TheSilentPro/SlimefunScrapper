@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 public class SlimefunScrapper {
 
-    private static ServerMock server;
     private static Logger logger;
     private static Slimefun slimefun;
 
@@ -35,24 +34,26 @@ public class SlimefunScrapper {
     }
 
     private static void setup(File exportFile) {
+        long start = System.currentTimeMillis();
+
         if (!validate()) {
             logger = LoggerFactory.getLogger("Scrapper");
             logger.info("Loading...");
-            long start = System.currentTimeMillis();
-            server = MockBukkit.mock();
+            ServerMock server = MockBukkit.mock();
             slimefun = MockBukkit.load(Slimefun.class);
+            logger.info("Environment >> Java: " + System.getProperty("java.version") + " | " + " Slimefun: " + slimefun.getPluginVersion() + " | Server: " + server.getVersion() + " | Bukkit: " + server.getBukkitVersion());
 
             logger.debug("Setting up slimefun...");
             SlimefunItemSetup.setup(slimefun);
             ResearchSetup.setupResearches();
             PostSetup.setupWiki();
-
-            logger.info("Exporting to file: " + exportFile.getAbsolutePath());
-            export(exportFile);
-
-            long elapsed = System.currentTimeMillis() - start;
-            logger.info("Done! Took: " + elapsed + "ms (" + TimeUnit.MILLISECONDS.toSeconds(elapsed) + "s)");
         }
+
+        logger.info("Exporting to file: " + exportFile.getAbsolutePath());
+        export(exportFile);
+
+        long elapsed = System.currentTimeMillis() - start;
+        logger.info("Done! Took: " + elapsed + "ms (" + TimeUnit.MILLISECONDS.toSeconds(elapsed) + "s)");
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
@@ -78,10 +79,6 @@ public class SlimefunScrapper {
         } catch (IOException exception) {
             logger.error("Failed to write!", exception);
         }
-    }
-
-    public static Logger getLogger() {
-        return logger;
     }
 
 }
