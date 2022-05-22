@@ -11,9 +11,11 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
+import org.bukkit.inventory.ItemStack;
 import tsp.slimefunscrapper.mapper.AddonMapper;
 import tsp.slimefunscrapper.mapper.ItemGroupMapper;
 import tsp.slimefunscrapper.mapper.ItemSettingMapper;
+import tsp.slimefunscrapper.mapper.ItemStackMapper;
 import tsp.slimefunscrapper.mapper.OptionalMapper;
 import tsp.slimefunscrapper.mapper.RecipeTypeMapper;
 import tsp.slimefunscrapper.mapper.ResearchMapper;
@@ -31,6 +33,7 @@ public class JsonUtils {
             .registerTypeAdapter(SlimefunAddon.class, new AddonMapper())
             .registerTypeAdapter(ItemGroup.class, new ItemGroupMapper())
             .registerTypeAdapter(ItemSetting.class, new ItemSettingMapper())
+            .registerTypeAdapter(ItemStack.class, new ItemStackMapper())
             .registerTypeAdapter(RecipeType.class, new RecipeTypeMapper())
             .registerTypeAdapter(Research.class, new ResearchMapper())
             .registerTypeAdapter(SimpleSlimefunItem.class, new SimpleSlimefunItemMapper())

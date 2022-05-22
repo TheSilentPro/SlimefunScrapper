@@ -24,6 +24,16 @@ import java.util.Set;
 
 public class SlimefunItemMapper extends JsonMapper<SlimefunItem> {
 
+    private final boolean compact;
+
+    public SlimefunItemMapper(boolean compact) {
+        this.compact = compact;
+    }
+
+    public SlimefunItemMapper() {
+        this(true);
+    }
+
     @Override
     public SlimefunItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         throw new UnsupportedOperationException();
@@ -52,15 +62,17 @@ public class SlimefunItemMapper extends JsonMapper<SlimefunItem> {
             main.add("research", context.serialize(src.getResearch(), Research.class));
         }
 
-        // ItemSettings
-        Set<ItemSetting<?>> settings = src.getItemSettings();
-        if (!settings.isEmpty()) {
-            JsonArray json = new JsonArray();
-            for (ItemSetting<?> setting : settings) {
-                json.add(context.serialize(setting, ItemSetting.class));
-            }
+        if (!compact) {
+            // ItemSettings
+            Set<ItemSetting<?>> settings = src.getItemSettings();
+            if (!settings.isEmpty()) {
+                JsonArray json = new JsonArray();
+                for (ItemSetting<?> setting : settings) {
+                    json.add(context.serialize(setting, ItemSetting.class));
+                }
 
-            main.add("settings", json);
+                main.add("settings", json);
+            }
         }
 
         // ItemGroup
@@ -83,12 +95,13 @@ public class SlimefunItemMapper extends JsonMapper<SlimefunItem> {
         // Radioactivity
         if (src instanceof Radioactive radioactive) {
             JsonObject radioactivity = new JsonObject();
+            radioactivity.addProperty("name", radioactive.getRadioactivity().name());
             radioactivity.addProperty("level", radioactive.getRadioactivity().getRadiationLevel());
 
             main.add("radioactivity", radioactivity);
         }
 
-        // Energy Net
+        // Energy
         if (src instanceof EnergyNetComponent component) {
             JsonObject json = new JsonObject();
             json.addProperty("type", component.getEnergyComponentType().name());
@@ -98,6 +111,7 @@ public class SlimefunItemMapper extends JsonMapper<SlimefunItem> {
             main.add("energy", json);
         }
 
+        // Protective Armor
         if (src instanceof ProtectiveArmor armor) {
             JsonObject json = new JsonObject();
             json.addProperty("full_required", armor.isFullSetRequired());

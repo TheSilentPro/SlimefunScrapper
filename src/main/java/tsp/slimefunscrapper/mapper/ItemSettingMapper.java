@@ -20,7 +20,7 @@ public class ItemSettingMapper extends JsonMapper<ItemSetting<?>> {
     public JsonElement serialize(ItemSetting<?> src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject main = new JsonObject();
         main.addProperty("key", src.getKey());
-        main.addProperty("value", String.valueOf(src.getValue()));
+        //main.addProperty("value", String.valueOf(src.getValue())); - Server based
         main.addProperty("default_value", String.valueOf(src.getDefaultValue()));
 
         return main;

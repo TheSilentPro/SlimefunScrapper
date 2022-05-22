@@ -17,6 +17,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Scrapper for Slimefun Items.
+ *
+ * @author TheSilentPro (Silent)
+ */
 public class SlimefunScrapper {
 
     private static Logger logger;
