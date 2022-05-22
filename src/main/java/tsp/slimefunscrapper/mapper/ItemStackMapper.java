@@ -9,6 +9,8 @@ import com.google.gson.JsonSerializationContext;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionData;
 
 import java.lang.reflect.Type;
 
@@ -53,6 +55,16 @@ public class ItemStackMapper extends JsonMapper<ItemStack> {
                 }
 
                 meta.add("lore", lore);
+            }
+
+            if (im instanceof PotionMeta) {
+                JsonObject pm = new JsonObject();
+                PotionData data = ((PotionMeta) im).getBasePotionData();
+                pm.addProperty("type", data.getType().name());
+                pm.addProperty("extended", data.isExtended());
+                pm.addProperty("upgraded", data.isUpgraded());
+
+                meta.add("base_potion_data", pm);
             }
 
             // Detailed
