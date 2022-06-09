@@ -24,16 +24,6 @@ import java.util.Set;
 
 public class SlimefunItemMapper extends JsonMapper<SlimefunItem> {
 
-    private final boolean compact;
-
-    public SlimefunItemMapper(boolean compact) {
-        this.compact = compact;
-    }
-
-    public SlimefunItemMapper() {
-        this(true);
-    }
-
     @Override
     public SlimefunItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         throw new UnsupportedOperationException();
@@ -62,17 +52,15 @@ public class SlimefunItemMapper extends JsonMapper<SlimefunItem> {
             main.add("research", context.serialize(src.getResearch(), Research.class));
         }
 
-        if (!compact) {
-            // ItemSettings
-            Set<ItemSetting<?>> settings = src.getItemSettings();
-            if (!settings.isEmpty()) {
-                JsonArray json = new JsonArray();
-                for (ItemSetting<?> setting : settings) {
-                    json.add(context.serialize(setting, ItemSetting.class));
-                }
-
-                main.add("settings", json);
+        // ItemSettings
+        Set<ItemSetting<?>> settings = src.getItemSettings();
+        if (!settings.isEmpty()) {
+            JsonArray json = new JsonArray();
+            for (ItemSetting<?> setting : settings) {
+                json.add(context.serialize(setting, ItemSetting.class));
             }
+
+            main.add("settings", json);
         }
 
         // ItemGroup
