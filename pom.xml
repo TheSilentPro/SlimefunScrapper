@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <sfVersion>RC-31</sfVersion>
+        <sfVersion>RC-32</sfVersion>
         <spVersion>1.18.2</spVersion>
     </properties>
 
